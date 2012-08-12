@@ -30,7 +30,7 @@ header = """
 sources = [
   'coffee-script', 'grammar', 'helpers'
   'lexer', 'nodes', 'rewriter', 'scope'
-].map (filename) -> "src/#{filename}.coffee"
+].map (filename) -> "src/#{filename}.uni"
 
 # Run a CoffeeScript through our node/coffee interpreter.
 run = (args, cb) ->
@@ -68,7 +68,7 @@ task 'install', 'install CoffeeScript into /usr/local (or --prefix)', (options) 
 
 task 'build', 'build the CoffeeScript language from source', build = (cb) ->
   files = fs.readdirSync 'src'
-  files = ('src/' + file for file in files when file.match(/\.coffee$/))
+  files = ('src/' + file for file in files when file.match(/\.uni$/))
   run ['-c', '-o', 'lib/coffee-script'].concat(files), cb
 
 
