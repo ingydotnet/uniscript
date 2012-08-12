@@ -7,7 +7,7 @@
 {RESERVED, STRICT_PROSCRIBED} = require './lexer'
 
 # Import the helpers we plan to use.
-{compact, flatten, extend, merge, del, starts, ends, last} = require './helpers'
+{compact, flatten, extend, merge, del, starts, ends, last, some} = require './helpers'
 
 exports.extend = extend  # for parser
 
@@ -787,7 +787,7 @@ exports.Slice = class Slice extends Base
         "#{+compiled + 1}"
       else
         compiled = to.compile o, LEVEL_ACCESS
-        "#{compiled} + 1 || 9e9"
+        "+#{compiled} + 1 || 9e9"
     ".slice(#{ fromStr }#{ toStr or '' })"
 
 #### Obj
@@ -801,14 +801,6 @@ exports.Obj = class Obj extends Base
 
   compileNode: (o) ->
     props = @properties
-    propNames = []
-    for prop in @properties
-      prop = prop.variable if prop.isComplex()
-      if prop?
-        propName = prop.unwrapAll().value.toString()
-        if propName in propNames
-          throw SyntaxError "multiple object literal properties named \"#{propName}\""
-        propNames.push propName
     return (if @front then '({})' else '{}') unless props.length
     if @generated
       for node in props when node instanceof Value
