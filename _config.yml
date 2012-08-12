@@ -3,3 +3,4 @@ source: .
 lsi: false
 pygments: true
 server: true
+auto: true
