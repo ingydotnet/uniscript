@@ -1,1 +1,0 @@
-- Setup DNS for UniScript
