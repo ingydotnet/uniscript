@@ -1,0 +1,30 @@
+name: UniScript
+description: A C'Dent Syntax - Inspired by CoffeeScript
+version: 0.0.1
+licenses:
+- type: MIT
+  url: https://raw.github.com/ingydotnet/uniscript/master/LICENSE
+
+author: Ingy döt Net <ingy@ingy.net> (http://ingy.net)
+keywords: [language, syntax, acmeism, uniscript, coffeescript]
+
+homepage: http://uniscript.org
+repository:
+  url: git://github.com/ingydotnet/uniscript.git
+  type: git
+bugs: https://github.com/ingydotnet/uniscript/issues
+
+bin:
+  cdent: ./bin/cdent
+
+npm:
+  main: ./lib/UniScript
+  directories:
+    lib: ./lib
+  engines:
+    node: '>=0.4.0'
+  devDependencies:
+    coffee-script: '>=1.3.3'
+    js-yaml: '>=1.0.2'
+  scripts:
+    test: coffee -e '(require "./test/lib/Test/Harness").run()' test
