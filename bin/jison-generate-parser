@@ -4,5 +4,7 @@
 extend global, require('util')
 require 'jison'
 parser = require('../lib/coffee-script/grammar').parser
-process.stdout.write parser.generate()
+parser_code = parser.generate()
+parser_code = parser_code.replace /^undefined/m, ''
+process.stdout.write parser_code
 

@@ -1,10 +1,11 @@
 .PHONY: build test node clean purge help node
 
 ALL_LIB := $(shell find src -type d)
-ALL_LIB := $(ALL_LIB:src/%=lib/coffee-script/%)
+ALL_LIB := $(ALL_LIB:src%=lib/coffee-script%)
 
 ALL_CDENT := $(shell find src -name *.uni)
 ALL_JS := $(ALL_CDENT:src/%.uni=lib/coffee-script/%.js)
+PARSER_JS := lib/coffee-script/parser.js
 
 default: help
 
@@ -22,8 +23,10 @@ help:
 	@echo '    make help    - Get Help'
 	@echo ''
 
-build: $(ALL_LIB) $(ALL_JS)
-	@# make -C test $@
+build: $(ALL_LIB) $(ALL_JS) $(PARSER_JS)
+
+$(PARSER_JS):
+	./bin/jison-generate-parser > $@
 
 lib/coffee-script/%.js: src/%.uni
 	coffee --compile -p $< > $@
